@@ -15,9 +15,16 @@ pipeline {
             }
         }
 
+        stage('Stop Old Container') {
+            steps {
+                sh 'docker stop house-price-prediction || true'
+                sh 'docker rm house-price-prediction || true'
+            }
+
+
         stage('Run Container') {
             steps {
-                sh 'docker run -d -p 8000:8000 house-price-app'
+                sh 'docker run -d -p 8001:8000 house-price-app'
             }
         }
     }
